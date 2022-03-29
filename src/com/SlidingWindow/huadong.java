@@ -1,4 +1,4 @@
-package com.dynamicProgramming;
+package com.SlidingWindow;
 
 /**
  * @author 东鑫
