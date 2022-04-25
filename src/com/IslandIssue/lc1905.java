@@ -10,7 +10,7 @@ package com.IslandIssue;
  *
  * @author 东鑫
  */
-public class lc1905 {
+public class  lc1905 {
     public int countSubIslands(int[][] grid1, int[][] grid2) {
         int m = grid1.length, n = grid1[0].length;
         for (int i = 0; i < m; i++) {
