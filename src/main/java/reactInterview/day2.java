@@ -17,45 +17,53 @@ public class day2 {
      */
     public List<List<String>> groupAnagrams(String[] strs) {
         List<List<String>> ans = new ArrayList<>();
-        if (strs.length == 0){
+        if (strs.length == 0) {
             return ans;
         }
         for (int i = 0; i < strs.length; i++) {
             Set<String> list1 = new HashSet<>();
             Set<String> list2 = new HashSet<>();
-
-            for (int j = i+1; j < strs.length; j++) {
-                if (strs[i].length() == strs[j].length()){
-                    if (isAnagram(strs[i],strs[j])){
+            for (int j = i + 1; j < strs.length; j++) {
+                if (strs[i].length() == strs[j].length()) {
+                    if (isAnagram(strs[i], strs[j])) {
                         list1.add(strs[i]);
                         list1.add(strs[j]);
-                    }else {
+                    } else {
                         list2.add(strs[i]);
                     }
-                }
-                else {
+                } else {
                     continue;
                 }
+            }
+            if (!list1.isEmpty()){
                 ans.add(list1.stream().toList());
-                ans.add( list2.stream().toList());
+            }
+            if (!list2.isEmpty()){
+                ans.add(list2.stream().toList());
             }
         }
         return ans;
     }
-public boolean isAnagram(String s, String t) {
-    int [] cnt = new int[26];
-    for (char a : s.toCharArray()) {
-        cnt[a - 'a']++;
-    }
-    for (char a : t.toCharArray()){
-        cnt[a - 'a']--;
-    }
-    for (int i = 0; i < 26; i++){
-        if (cnt[i] != 0){
-            return false;
+
+    public boolean isAnagram(String s, String t) {
+        int[] cnt = new int[26];
+        for (char a : s.toCharArray()) {
+            cnt[a - 'a']++;
         }
+        for (char a : t.toCharArray()) {
+            cnt[a - 'a']--;
+        }
+        for (int i = 0; i < 26; i++) {
+            if (cnt[i] != 0) {
+                return false;
+            }
+        }
+        return true;
     }
-    return true;
-}
+
+    public static void main(String[] args) {
+        String[] strs = {"eat", "tea", "tan", "ate", "nat", "bat"};
+        System.out.println(new day2().groupAnagrams(strs));
+    }
 
 }
