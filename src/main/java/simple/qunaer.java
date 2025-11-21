@@ -1,6 +1,5 @@
 package simple;
 
-import sun.misc.Queue;
 
 import java.util.*;
 

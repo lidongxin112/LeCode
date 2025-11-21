@@ -1,6 +1,9 @@
 package reactInterview;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class day2 {
     /**
@@ -13,6 +16,46 @@ public class day2 {
      * 字符串 "ate" ，"eat" 和 "tea" 是字母异位词，因为它们可以重新排列以形成彼此。
      */
     public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> ans = new ArrayList<>();
+        if (strs.length == 0){
+            return ans;
+        }
+        for (int i = 0; i < strs.length; i++) {
+            Set<String> list1 = new HashSet<>();
+            Set<String> list2 = new HashSet<>();
 
+            for (int j = i+1; j < strs.length; j++) {
+                if (strs[i].length() == strs[j].length()){
+                    if (isAnagram(strs[i],strs[j])){
+                        list1.add(strs[i]);
+                        list1.add(strs[j]);
+                    }else {
+                        list2.add(strs[i]);
+                    }
+                }
+                else {
+                    continue;
+                }
+                ans.add(list1.stream().toList());
+                ans.add( list2.stream().toList());
+            }
+        }
+        return ans;
     }
+public boolean isAnagram(String s, String t) {
+    int [] cnt = new int[26];
+    for (char a : s.toCharArray()) {
+        cnt[a - 'a']++;
+    }
+    for (char a : t.toCharArray()){
+        cnt[a - 'a']--;
+    }
+    for (int i = 0; i < 26; i++){
+        if (cnt[i] != 0){
+            return false;
+        }
+    }
+    return true;
+}
+
 }

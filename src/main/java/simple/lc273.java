@@ -1,6 +1,5 @@
 package simple;
 
-import static sun.nio.cs.Surrogate.low;
 
 /**
  *
