@@ -1,9 +1,6 @@
 package reactInterview;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class day2 {
     /**
@@ -20,29 +17,39 @@ public class day2 {
         if (strs.length == 0) {
             return ans;
         }
-        for (int i = 0; i < strs.length; i++) {
-            Set<String> list1 = new HashSet<>();
-            Set<String> list2 = new HashSet<>();
-            for (int j = i + 1; j < strs.length; j++) {
-                if (strs[i].length() == strs[j].length()) {
-                    if (isAnagram(strs[i], strs[j])) {
-                        list1.add(strs[i]);
-                        list1.add(strs[j]);
-                    } else {
-                        list2.add(strs[i]);
+        Set<String> set = new HashSet<>();
+        for (String s : strs) {
+            if (!set.contains(s)) {
+                List<String> list = new ArrayList<>();
+                for (String t : strs) {
+                    if (s.length() == t.length()) {
+                        if (isAnagram(s, t)) {
+                            list.add(t);
+                            set.add(t);
+                        }
                     }
-                } else {
-                    continue;
                 }
-            }
-            if (!list1.isEmpty()){
-                ans.add(list1.stream().toList());
-            }
-            if (!list2.isEmpty()){
-                ans.add(list2.stream().toList());
+                ans.add(list);
             }
         }
         return ans;
+    }
+    public List<List<String>> groupAnagrams2(String[] strs) {
+        Map<String,List<String>> map=new HashMap<>();
+        for (String s : strs) {
+            char[] chars = s.toCharArray();
+            Arrays.sort(chars);
+            String key = new String(chars);
+            if (map.containsKey(key)) {
+                List<String> list = map.get(key);
+                list.add(s);
+            } else {
+                List<String> list = new ArrayList<>();
+                list.add(s);
+                map.put(key, list);
+            }
+        }
+        return new ArrayList<>(map.values());
     }
 
     public boolean isAnagram(String s, String t) {
@@ -63,7 +70,7 @@ public class day2 {
 
     public static void main(String[] args) {
         String[] strs = {"eat", "tea", "tan", "ate", "nat", "bat"};
-        System.out.println(new day2().groupAnagrams(strs));
+        System.out.println(new day2().groupAnagrams2(strs));
     }
 
 }

@@ -1,5 +1,7 @@
 package reactInterview;
 
+import java.util.Arrays;
+
 public class day3 {
     /**
      * 给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
@@ -12,9 +14,27 @@ public class day3 {
      * 提示:
      * 1 <= nums.length <= 104
      * -231 <= nums[i] <= 231 - 1
+     *
      * @param nums
      */
     public void moveZeroes(int[] nums) {
+        int[] num = nums;
+        int b = 0;
+        for (int i = 0; i < num.length; i++) {
+            if (num[i] != 0) {
+                nums[b] = num[i];
+                b++;
+            }
+        }
+        for (int c = b + 1; c < num.length; c++) {
+            nums[c] = 0;
+        }
 
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {0, 1, 0, 3, 12};
+        new day3().moveZeroes(nums);
+        System.out.println(Arrays.toString(nums));
     }
 }

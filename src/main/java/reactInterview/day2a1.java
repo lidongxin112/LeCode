@@ -1,7 +1,6 @@
 package reactInterview;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class day2a1 {
     /**
@@ -24,6 +23,16 @@ public class day2a1 {
         }
         return true;
     }
+    public boolean isAnagram3(String s, String t) {
+        Set<String> set = new HashSet<>();
+        char[] chars = s.toCharArray();
+        Arrays.sort(chars);
+        set.add(new String(chars));
+        char[] chars1 = t.toCharArray();
+        Arrays.sort(chars1);
+        return set.contains(new String(chars1));
+    }
+
     public boolean isAnagramT(String s, String t) {
         Map<Integer, Integer> map = new HashMap<>();
         for (char a : s.toCharArray()) {
@@ -32,7 +41,7 @@ public class day2a1 {
         for (char a : t.toCharArray()){
             map.put(a - 'a', map.getOrDefault(a - 'a', 0) - 1);
         }
-        for (int i = 0; i < 26; i++){
+        for (Integer i : map.keySet()) {
             if (map.get(i) != 0){
                 return false;
             }
@@ -41,7 +50,7 @@ public class day2a1 {
     }
 
     public static void main(String[] args) {
-        System.out.println(new day2a1().isAnagram("anagram", "nagaram"));
+        System.out.println(new day2a1().isAnagramT("anagram", "nagaram"));
         System.out.println(new day2a1().isAnagram("rat", "car"));
         System.out.println(new day2a1().isAnagram("a", "ab"));
     }
