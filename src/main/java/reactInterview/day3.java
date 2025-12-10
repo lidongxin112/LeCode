@@ -26,10 +26,9 @@ public class day3 {
                 b++;
             }
         }
-        for (int c = b + 1; c < num.length; c++) {
+        for (int c = b; c < num.length; c++) {
             nums[c] = 0;
         }
-
     }
 
     public static void main(String[] args) {
