@@ -38,6 +38,7 @@ public class day5 {
             sums[i][i] = nums[i];
             for (int j = i+1;j<nums.length;j++){
                 sums[i][j] = sums[i][j-1] + nums[j];
+
                 if (sums[i][j] == k){
                     sum++;
                 }
